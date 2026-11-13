@@ -1,0 +1,59 @@
+.top {
+  display: flex; /* avatar and text side by side */
+  align-items: center; /* vertically centered */
+  gap: 12px; /* space between avatar and text */
+}
+
+.avatar {
+  display: grid; /* center the initials */
+  place-items: center;
+  flex-shrink: 0; /* never squash the circle */
+  width: 48px;
+  height: 48px;
+  border-radius: 50%; /* circle */
+  background: var(--accent); /* brand color */
+  color: #fff; /* white initials */
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.identity {
+  min-width: 0; /* allows long emails to shrink instead of overflowing */
+}
+
+.name {
+  font-size: 1.05rem;
+}
+
+.email {
+  color: var(--muted);
+  font-size: 0.82rem;
+  overflow: hidden; /* hide text that doesn't fit */
+  text-overflow: ellipsis; /* show "..." instead */
+  white-space: nowrap; /* keep the email on one line */
+}
+
+.details {
+  display: grid; /* two columns: Course and GPA */
+  grid-template-columns: 1fr auto; /* course takes the space, GPA fits its content */
+  gap: 12px;
+  margin: 16px 0 12px; /* space above and below */
+}
+
+.details dt {
+  color: var(--muted); /* the label */
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.details dd {
+  font-weight: 600; /* the value */
+}
+
+.actions {
+  display: flex; /* buttons side by side */
+  flex-wrap: wrap; /* wrap on very narrow cards */
+  gap: 8px;
+  margin-top: 16px;
+}

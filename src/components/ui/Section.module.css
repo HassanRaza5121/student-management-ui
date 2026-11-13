@@ -1,0 +1,17 @@
+.section {
+  margin-top: 32px; /* space above every section */
+}
+
+.header {
+  margin-bottom: 16px; /* space between the heading and the content */
+}
+
+.title {
+  font-size: 1.15rem; /* heading size */
+  letter-spacing: -0.01em; /* slightly tighter letters */
+}
+
+.description {
+  color: var(--muted); /* softer color */
+  font-size: 0.9rem;
+}

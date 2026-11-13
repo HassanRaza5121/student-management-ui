@@ -1,0 +1,15 @@
+.card {
+  background: var(--surface); /* white (or dark blue in dark mode) */
+  border: 1px solid var(--border); /* thin outline */
+  border-radius: 16px; /* rounded corners */
+  padding: 20px; /* space between the edge and the content */
+  box-shadow: var(--shadow); /* soft shadow so it floats */
+  height: 100%; /* fill the grid cell so cards in a row have equal height */
+}
+
+.hoverable {
+  transition: transform 0.2s, box-shadow 0.2s; /* animate the lift */
+}
+.hoverable:hover {
+  transform: translateY(-4px); /* move up 4px */
+}

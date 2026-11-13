@@ -1,122 +1,73 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useState } from "react"; // hook that lets a component remember a value
+import Section from "./components/ui/Section"; // layout block with a title
+import StatCard from "./components/StatCard"; // one statistic box
+import StudentCard from "./components/StudentCard"; // one student box
+import { students } from "./data/students"; // the sample data
+import type { Student } from "./types/student"; // the student type
+import styles from "./App.module.css"; // scoped styles for this page
 
 function App() {
-  const [count, setCount] = useState(0)
+  // STATE: a value React remembers. When it changes, the page updates.
+  const [message, setMessage] = useState("Choose an action on a student card.");
+
+  // These two functions are handed DOWN to children as props.
+  // The child CALLS them when a button is clicked.
+  const handleView = (student: Student) => {
+    setMessage(`Viewing profile of ${student.name}`); // change the message
+  };
+  const handleMessage = (student: Student) => {
+    setMessage(`Opening a message to ${student.email}`);
+  };
+
+  // DERIVED DATA: calculated from the list, never typed by hand.
+  const total = students.length; // how many students
+  const activeCount = students.filter((s) => s.status === "active").length; // keep only active, then count
+  const averageGpa = (
+    students.reduce((sum, s) => sum + s.gpa, 0) / total // add all GPAs, divide by the count
+  ).toFixed(2); // round to 2 decimals (this gives a string)
+  const courseCount = new Set(students.map((s) => s.course)).size; // Set removes duplicates
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <main className={styles.page}>
+      <header>
+        <h1 className={styles.title}>Student Dashboard</h1>
+        <p className={styles.subtitle}>
+          Browse students, track enrollment and view performance at a glance 
+        </p>
+      </header>
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+      <Section title="Overview">
+        <div className={styles.statGrid}>
+          {/* Same component 4 times, different props each time = reusability */}
+          <StatCard label="Total students" value={total} icon="🎓" />
+          <StatCard label="Active" value={activeCount} icon="✅" hint="Currently enrolled" />
+          <StatCard label="Average GPA" value={averageGpa} icon="📈" hint="Out of 4.0" />
+          <StatCard label="Courses" value={courseCount} icon="📚" />
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+      </Section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      {/* role="status" makes screen readers announce the message when it changes */}
+      <p className={styles.notice} role="status">
+        {message}
+      </p>
+
+      <Section title="Students" description={`${total} students in the directory`}>
+        <ul className={styles.studentGrid}>
+          {/* .map() turns each student object into a card. */}
+          {students.map((student) => (
+            // "key" must be unique per item so React can track list items.
+            <li key={student.id}>
+              <StudentCard
+                student={student} // pass the data down
+                onView={handleView} // pass the function down (no parentheses!)
+                onMessage={handleMessage} // optional prop: remove this line and the Message button disappears
+              />
+            </li>
+          ))}
+        </ul>
+      </Section>
+    </main>
+  );
 }
 
-export default App
+export default App;

@@ -1,0 +1,57 @@
+/* Because this is a .module.css file, ".button" becomes a unique name like "Button_button__x7Fq2". */
+/* That means it can never clash with another file's ".button". */
+.button {
+  display: inline-flex; /* lets us center the content easily */
+  align-items: center; /* vertical centering */
+  justify-content: center; /* horizontal centering */
+  padding: 10px 16px; /* space inside the button */
+  border-radius: 10px; /* rounded corners */
+  border: 2px solid transparent; /* invisible border so sizes match across variants */
+  font: inherit; /* use the page font instead of the browser's button font */
+  font-size: 0.9rem; /* slightly smaller than body text */
+  font-weight: 600; /* semi-bold */
+  cursor: pointer; /* show the hand cursor */
+  transition: transform 0.15s, background 0.15s; /* smooth hover animation */
+}
+
+.button:hover:not(:disabled) {
+  transform: translateY(-1px); /* lift 1px, only if the button is enabled */
+}
+
+.button:focus-visible {
+  outline: 3px solid var(--accent); /* visible ring for keyboard users */
+  outline-offset: 2px; /* gap between the button and the ring */
+}
+
+.button:disabled {
+  opacity: 0.5; /* faded look */
+  cursor: not-allowed; /* "no" cursor */
+}
+
+/* Variant: primary (filled) */
+.primary {
+  background: var(--accent);
+  color: #fff;
+}
+.primary:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+/* Variant: outline (border only) */
+.outline {
+  background: transparent;
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.outline:hover:not(:disabled) {
+  background: var(--chip-bg);
+}
+
+/* Variant: ghost (text only) */
+.ghost {
+  background: transparent;
+  color: var(--muted);
+}
+.ghost:hover:not(:disabled) {
+  background: var(--chip-bg);
+}

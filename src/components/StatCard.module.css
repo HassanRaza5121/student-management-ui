@@ -1,0 +1,31 @@
+.row {
+  display: flex; /* icon and text sit side by side */
+  align-items: center; /* vertically centered */
+  gap: 14px; /* space between icon and text */
+}
+
+.icon {
+  display: grid; /* easy way to center the emoji */
+  place-items: center; /* center both ways */
+  width: 48px; /* fixed square size */
+  height: 48px;
+  border-radius: 12px; /* rounded square */
+  background: var(--chip-bg); /* light brand color */
+  font-size: 1.4rem; /* bigger emoji */
+}
+
+.label {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.value {
+  font-size: 1.7rem;
+  font-weight: 700; /* bold number */
+  line-height: 1.2;
+}
+
+.hint {
+  color: var(--muted);
+  font-size: 0.78rem;
+}

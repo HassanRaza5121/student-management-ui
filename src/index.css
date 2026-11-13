@@ -1,0 +1,66 @@
+/* :root holds CSS variables. Every file can use them with var(--name). */
+:root {
+  --bg: #f1f5f9; /* page background */
+  --surface: #ffffff; /* card background */
+  --text: #0f172a; /* main text color */
+  --muted: #475569; /* softer text color */
+  --accent: #4f46e5; /* brand color */
+  --accent-hover: #4338ca; /* darker brand color for hover */
+  --chip-bg: #e0e7ff; /* light brand background */
+  --border: #e2e8f0; /* thin borders */
+  --shadow: 0 8px 24px rgba(15, 23, 42, 0.08); /* soft shadow */
+
+  --success-bg: #dcfce7; /* green badge background */
+  --success-text: #166534; /* green badge text */
+  --warning-bg: #fef3c7; /* amber badge background */
+  --warning-text: #92400e; /* amber badge text */
+  --info-bg: #dbeafe; /* blue badge background */
+  --info-text: #1e40af; /* blue badge text */
+  --neutral-bg: #e2e8f0; /* grey badge background */
+  --neutral-text: #334155; /* grey badge text */
+}
+
+/* If the visitor's device is in dark mode, swap the variable values. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1120;
+    --surface: #111a2e;
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+    --accent: #6366f1;
+    --accent-hover: #818cf8;
+    --chip-bg: #27235c;
+    --border: #1e293b;
+    --shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+
+    --success-bg: #14532d;
+    --success-text: #bbf7d0;
+    --warning-bg: #78350f;
+    --warning-text: #fde68a;
+    --info-bg: #1e3a8a;
+    --info-text: #bfdbfe;
+    --neutral-bg: #1e293b;
+    --neutral-text: #cbd5e1;
+  }
+}
+
+/* Reset: remove the browser's default spacing so every browser looks the same. */
+* {
+  box-sizing: border-box; /* padding and border are included in an element's width */
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif; /* fonts already on the device */
+  background: var(--bg); /* use the variable from :root */
+  color: var(--text);
+  line-height: 1.5; /* comfortable line spacing */
+}
+
+/* Respect users who turned off animations in their system settings. */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}

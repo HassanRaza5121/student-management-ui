@@ -1,0 +1,41 @@
+.page {
+  max-width: 1100px; /* don't stretch too wide on big screens */
+  margin: 0 auto; /* center the page horizontally */
+  padding: 40px 20px 56px; /* space around the content */
+}
+
+.title {
+  font-size: clamp(1.7rem, 4vw, 2.4rem); /* grows with the screen, between a min and a max */
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+/* RESPONSIVE GRID for the 4 stat cards */
+.statGrid {
+  display: grid; /* turn on CSS Grid */
+  /* auto-fit: make as many columns as fit. Each column is at least 200px, and they share any extra space (1fr). */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px; /* space between cards */
+}
+
+/* RESPONSIVE GRID for the student cards */
+.studentGrid {
+  list-style: none; /* remove the bullet points */
+  display: grid;
+  /* auto-fill: like auto-fit, but keeps empty column slots so cards never get too wide. */
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.notice {
+  margin-top: 28px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: var(--chip-bg); /* light brand background */
+  border: 1px solid var(--border);
+  font-size: 0.9rem;
+}

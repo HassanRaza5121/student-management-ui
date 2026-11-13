@@ -1,0 +1,25 @@
+.badge {
+  display: inline-block; /* sits in a line but accepts padding */
+  padding: 4px 10px; /* space inside */
+  border-radius: 999px; /* fully rounded "pill" shape */
+  font-size: 0.75rem; /* small text */
+  font-weight: 600; /* semi-bold */
+  text-transform: capitalize; /* "active" is shown as "Active" */
+}
+
+.success {
+  background: var(--success-bg); /* green */
+  color: var(--success-text);
+}
+.warning {
+  background: var(--warning-bg); /* amber */
+  color: var(--warning-text);
+}
+.info {
+  background: var(--info-bg); /* blue */
+  color: var(--info-text);
+}
+.neutral {
+  background: var(--neutral-bg); /* grey */
+  color: var(--neutral-text);
+}
