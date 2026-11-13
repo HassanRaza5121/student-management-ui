@@ -10,13 +10,12 @@ export function getInitials(name: string): string {
     .toUpperCase(); // make them capitals
 }
 
-// The shape of what getGpaStanding returns.
 export interface GpaStanding {
   label: string; // text to show
-  tone: BadgeTone; // badge color to use
+  tone: BadgeTone; // badge color
 }
 
-// Turns a GPA number into a readable label. Checked from highest to lowest.
+// Turns a GPA number into a label. Checked from highest to lowest.
 export function getGpaStanding(gpa: number): GpaStanding {
   if (gpa >= 3.7) return { label: "Excellent", tone: "success" };
   if (gpa >= 3.3) return { label: "Good", tone: "info" };

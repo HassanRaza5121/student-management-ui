@@ -1,23 +1,26 @@
 import { useState } from "react"; // hook that lets a component remember a value
 import Section from "./components/ui/Section"; // layout block with a title
+import Modal from "./components/ui/Modal"; // reusable popup
 import StatCard from "./components/StatCard"; // one statistic box
 import StudentCard from "./components/StudentCard"; // one student box
+import StudentProfile from "./components/StudentProfile"; // profile popup content
+import MessageForm from "./components/MessageForm"; // message popup content
 import { students } from "./data/students"; // the sample data
 import type { Student } from "./types/student"; // the student type
 import styles from "./App.module.css"; // scoped styles for this page
 
 function App() {
-  // STATE: a value React remembers. When it changes, the page updates.
-  const [message, setMessage] = useState("Choose an action on a student card.");
+  // STATE 1: whose PROFILE is open. null means "no profile popup".
+  const [profileStudent, setProfileStudent] = useState<Student | null>(null);
+  // STATE 2: whose MESSAGE box is open. null means "no message popup".
+  const [messageStudent, setMessageStudent] = useState<Student | null>(null);
 
-  // These two functions are handed DOWN to children as props.
+  // These functions are handed DOWN to children as props.
   // The child CALLS them when a button is clicked.
-  const handleView = (student: Student) => {
-    setMessage(`Viewing profile of ${student.name}`); // change the message
-  };
-  const handleMessage = (student: Student) => {
-    setMessage(`Opening a message to ${student.email}`);
-  };
+  const handleView = (student: Student) => setProfileStudent(student); // open profile
+  const handleCloseProfile = () => setProfileStudent(null); // close profile
+  const handleMessage = (student: Student) => setMessageStudent(student); // open message box
+  const handleCloseMessage = () => setMessageStudent(null); // close message box
 
   // DERIVED DATA: calculated from the list, never typed by hand.
   const total = students.length; // how many students
@@ -32,7 +35,7 @@ function App() {
       <header>
         <h1 className={styles.title}>Student Dashboard</h1>
         <p className={styles.subtitle}>
-          Browse students, track enrollment and view performance at a glance 
+          Browse students, track enrollment and view performance at a glance.
         </p>
       </header>
 
@@ -46,11 +49,6 @@ function App() {
         </div>
       </Section>
 
-      {/* role="status" makes screen readers announce the message when it changes */}
-      <p className={styles.notice} role="status">
-        {message}
-      </p>
-
       <Section title="Students" description={`${total} students in the directory`}>
         <ul className={styles.studentGrid}>
           {/* .map() turns each student object into a card. */}
@@ -59,13 +57,27 @@ function App() {
             <li key={student.id}>
               <StudentCard
                 student={student} // pass the data down
-                onView={handleView} // pass the function down (no parentheses!)
-                onMessage={handleMessage} // optional prop: remove this line and the Message button disappears
+                onView={handleView} // "View profile" button (no parentheses!)
+                onMessage={handleMessage} // "Message" button
               />
             </li>
           ))}
         </ul>
       </Section>
+
+      {/* Profile popup: rendered only while a student is selected. */}
+      {profileStudent && (
+        <Modal title="Student profile" onClose={handleCloseProfile}>
+          <StudentProfile student={profileStudent} onClose={handleCloseProfile} />
+        </Modal>
+      )}
+
+      {/* Message popup: rendered only while a student is selected for messaging. */}
+      {messageStudent && (
+        <Modal title={`Message ${messageStudent.name}`} onClose={handleCloseMessage}>
+          <MessageForm student={messageStudent} onClose={handleCloseMessage} />
+        </Modal>
+      )}
     </main>
   );
 }

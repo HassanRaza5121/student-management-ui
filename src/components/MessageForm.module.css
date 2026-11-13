@@ -1,0 +1,64 @@
+.form {
+  display: grid; /* stack everything vertically */
+  gap: 6px; /* small space between items */
+}
+
+.to {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 8px;
+  overflow-wrap: anywhere; /* long emails wrap instead of overflowing */
+}
+
+.label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+/* Shared look for the input and the textarea */
+.input,
+.textarea {
+  width: 100%; /* fill the popup */
+  padding: 10px 12px; /* space inside */
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg); /* slightly different from the popup background */
+  color: var(--text);
+  font: inherit; /* use the page font, not the browser default */
+  font-size: 0.95rem;
+}
+
+.textarea {
+  resize: vertical; /* the user can drag it taller, but not wider */
+  min-height: 110px;
+}
+
+/* Highlight the active field */
+.input:focus-visible,
+.textarea:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.counter {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-align: right; /* sits under the right edge of the textarea */
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap; /* buttons wrap on narrow screens */
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.tip {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--success-bg); /* green box */
+  color: var(--success-text);
+  font-size: 0.85rem;
+}

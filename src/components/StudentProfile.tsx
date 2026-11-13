@@ -1,10 +1,10 @@
-import { useState } from "react"; // lets the component remember "copied"
-import Badge from "./ui/Badge"; // reusable label
-import Button from "./ui/Button"; // reusable button
-import { statusTone } from "../utils/studentStatus"; // status -> badge color
-import { getGpaStanding, getInitials } from "../utils/studentHelpers"; // helper functions
-import type { Student } from "../types/student"; // the student type
-import styles from "./StudentProfile.module.css"; // scoped styles
+import { useState } from "react";
+import Badge from "./ui/Badge";
+import Button from "./ui/Button";
+import { statusTone } from "../utils/studentStatus";
+import { getGpaStanding, getInitials } from "../utils/studentHelpers";
+import type { Student } from "../types/student";
+import styles from "./StudentProfile.module.css";
 
 interface StudentProfileProps {
   student: Student; // REQUIRED: whose profile to show
